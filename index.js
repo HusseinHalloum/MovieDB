@@ -51,21 +51,33 @@ app.get('/movies/update', (req, res) =>{
 app.get('/movies/delete', (req, res) =>{
     res.send('delete')
 })
+
 app.get('/movies/read/by-date', (req, res) =>{
     res.send({status:200, data :movies.sort((a, b) => {
         if (a.year !== b.year)
          return a.year - b.year;
     })})
 })
+
 app.get('/movies/read/by-rating', (req, res) =>{
     res.send({status:200, data : movies.sort((a, b) => {
         return b.rating - a.rating;
    })})
 })
+
 app.get('/movies/read/by-title', (req, res) =>{
     res.send({status:200, data : movies.sort((a, b) => {
         a.title !== b.title ? a.title < b.title ? -1 : 1 : 0})
     })
 })
 
+app.get('/movies/read/id/:id',(req, res) => {
+    const id = req.params.id;
+    if(!movies[id]){
+        res.send({ status:404, error:true, message:'the movie '+id+' does not exist'})
+    }
+    else{
+    res.send({status: 200, data : movies[id]})
+    }
+})
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
