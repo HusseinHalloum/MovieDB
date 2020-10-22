@@ -67,7 +67,10 @@ app.get('/movies/read/by-rating', (req, res) =>{
 
 app.get('/movies/read/by-title', (req, res) =>{
     res.send({status:200, data : movies.sort((a, b) => {
-        a.title !== b.title ? a.title < b.title ? -1 : 1 : 0})
+        if(a.title < b.title) { return -1; }
+        if(a.title > b.title) { return 1; }
+        return 0;
+        })
     })
 })
 
