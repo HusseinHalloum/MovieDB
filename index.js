@@ -103,8 +103,8 @@ app.get('/movies/add', (req, res) => {
 app.get('/movies/delete/:id', (req, res) => {
     let id = req.params.id;
     intId = parseInt(id)
-    if(intId <= movies.length){
-        movies.splice(intId-1,intId-1)
+    if(intId <= movies.length && intId > 0){
+        movies.splice(intId-1)
         res.send({data: movies})
         }
     else{
