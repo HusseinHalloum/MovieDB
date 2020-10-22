@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3004
+const port = 3000
 const date = new Date();
 let  time = date.getHours() + ":" + date.getSeconds();
 
@@ -37,6 +37,8 @@ app.get('/search', (req, res) => {
 })
 
 // Step - 5 - 
+
+
 app.get('/movies/create', (req, res) =>{
     res.send('create')
 })
@@ -48,6 +50,22 @@ app.get('/movies/update', (req, res) =>{
 })
 app.get('/movies/delete', (req, res) =>{
     res.send('delete')
+})
+app.get('/movies/read/by-date', (req, res) =>{
+    res.send({status:200, data :movies.sort((a, b) => {
+        if (a.year !== b.year)
+         return a.year - b.year;
+    })})
+})
+app.get('/movies/read/by-rating', (req, res) =>{
+    res.send({status:200, data : movies.sort((a, b) => {
+        return b.rating - a.rating;
+   })})
+})
+app.get('/movies/read/by-title', (req, res) =>{
+    res.send({status:200, data : movies.sort((a, b) => {
+        a.title !== b.title ? a.title < b.title ? -1 : 1 : 0})
+    })
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
