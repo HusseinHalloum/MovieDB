@@ -99,4 +99,18 @@ app.get('/movies/add', (req, res) => {
         res.send({data : movies}) 
     }
 })
+
+app.get('/movies/delete/:id', (req, res) => {
+    let id = req.params.id;
+    intId = parseInt(id)
+    if(intId <= movies.length){
+        movies.splice(intId-1,intId-1)
+        res.send({data: movies})
+        }
+    else{
+        res.send({status:404, error:true, message:'the movie '+ id +' does not exist'})
+        }
+    
+})
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
