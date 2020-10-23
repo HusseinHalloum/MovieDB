@@ -78,9 +78,7 @@ app.get('/movies/read', (req, res) => {
         data: movies
     })
 })
-app.get('/movies/update', (req, res) => {
-    res.send('update')
-})
+
 app.get('/movies/delete', (req, res) => {
     res.send('delete')
 })
@@ -135,7 +133,7 @@ app.get('/movies/read/id/:id', (req, res) => {
     }
 })
 
-app.get('/movies/add', (req, res) => {
+app.post('/movies/add', (req, res) => {
     let title = req.query.title;
     let year = req.query.year;
     let rating = req.query.rating
@@ -166,7 +164,7 @@ app.get('/movies/add', (req, res) => {
     }
 })
 
-app.get('/movies/delete/:id', (req, res) => {
+app.delete('/movies/delete/:id', (req, res) => {
     let id = req.params.id;
     intId = parseInt(id)
     if (intId <= movies.length && intId > 0) {
@@ -184,7 +182,7 @@ app.get('/movies/delete/:id', (req, res) => {
 
 })
 
-app.get('/movies/update/:id', (req, res) => {
+app.put('/movies/update/:id', (req, res) => {
     let id = parseInt(req.params.id);
     let title = req.query.title;
     let year = req.query.year;
@@ -206,5 +204,6 @@ app.get('/movies/update/:id', (req, res) => {
         res.send('error')
     }
 })
+
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
